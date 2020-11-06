@@ -45,23 +45,90 @@ int main() {
     }
 
     // Run the loop for each end character
-    for (int c=0; c<2; ++c) {
+    for (int c=0; c < endChars.size(); ++c) {
 
         // Cycle through all single word passwords
         for (int w=0; w < words.size(); ++w) {
             
             // Cycle through all positions for the numbers
-            for (int n=0; n<100; ++n){
+            for (int n=0; n < numbers.size(); ++n){
                 file << numbers[n] << words[w] << endChars[c] << endl;
+                file << words[w] << numbers[n] << endChars[c] << endl;
             }
         }
+
         // Cycle through double word passwords
+        for (int w=0; w < words.size(); ++w) {
             
+            // Cycle through for the second word
+            for(int w2=0; w2 < words.size(); ++w2) {
+                
+                // Cancel this cycle if the words are the same
+                if (!(w==w2)) {
+                    
+                    // Cycle through all positions for the numbers
+                    for (int n=0; n < numbers.size(); ++n){
+                        file << numbers[n] << words[w] << words[w2] << endChars[c] << endl;
+                        file << words[w] << numbers[n] << words[w2] << endChars[c] << endl;
+                        file << words[w] << words[w2] << numbers[n] << endChars[c] << endl;
+                    }
+                }
+            }
+        }
+        
         // Cycle through triple word passwords
+        for (int w=0; w < words.size(); ++w) {
+            
+            // Cycle through for the second word
+            for(int w2=0; w2 < words.size(); ++w2) {
+                
+                // Cycle through for the third word
+                for(int w3=0; w3 < words.size(); ++w3) {
+                    
+                    // Cancel this cycle if the words are the same
+                    if (!(w==w2 | w==w3 | w2==w3)) {
+
+                        // Cycle through all positions for the numbers
+                        for (int n=0; n < numbers.size(); ++n){
+                            file << numbers[n] << words[w] << words[w2] << words[w3] << endChars[c] << endl;
+                            file << words[w] << numbers[n] << words[w2] << words[w3] << endChars[c] << endl;
+                            file << words[w] << words[w2] << numbers[n] << words[w3] << endChars[c] << endl;
+                            file << words[w] << words[w2] << words[w3] << numbers[n] << endChars[c] << endl;
+                        }
+                    }
+                }
+            }
+        }
 
         // Cycle through quadruple word passwords
+        for (int w=0; w < words.size(); ++w) {
+            
+            // Cycle through for the second word
+            for(int w2=0; w2 < words.size(); ++w2) {
+                
+                // Cycle through for the third word
+                for(int w3=0; w3 < words.size(); ++w3) {
 
+                    // Cycle through for the fourth word
+                    for(int w4=0; w4 < words.size(); ++w4) {
+
+                        // Cancel this cycle if the words are the same
+                        if (!(w==w2 | w==w3 | w==w4 | w2==w3 | w2==w4 | w3==w4)) {
+                            // Cycle through all positions for the numbers
+                            for (int n=0; n < numbers.size(); ++n){
+                                file << numbers[n] << words[w] << words[w2] << words[w3] << words[w4] << endChars[c] << endl;
+                                file << words[w] << numbers[n] << words[w2] << words[w3] << words[w4] << endChars[c] << endl;
+                                file << words[w] << words[w2] << numbers[n] << words[w3] << words[w4] << endChars[c] << endl;
+                                file << words[w] << words[w2] << words[w3] << numbers[n] << words[w4] << endChars[c] << endl;
+                                file << words[w] << words[w2] << words[w3] << words[w4] << numbers[n] << endChars[c] << endl;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
+
     // Close the file when finished, and print a completion message with some basic statistics
-    file.close();
+    file.close(); cout << "Done!\n";
 }
